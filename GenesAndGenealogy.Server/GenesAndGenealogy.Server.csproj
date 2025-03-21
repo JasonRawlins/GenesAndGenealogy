@@ -22,4 +22,10 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Gedcom">
+      <HintPath>..\..\Gedcom\bin\Debug\net8.0\Gedcom.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

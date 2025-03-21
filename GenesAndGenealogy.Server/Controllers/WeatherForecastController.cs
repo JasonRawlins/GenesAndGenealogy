@@ -29,5 +29,11 @@ namespace GenesAndGenealogy.Server.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("SomeString/{xref}")]
+        public string SomeString(string xref)
+        {
+            return $"Individual: {xref}";
+        }
     }
 }
