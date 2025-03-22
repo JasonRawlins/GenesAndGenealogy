@@ -20,16 +20,17 @@ namespace GenesAndGenealogy.Server.Controllers
             Gedcom1 = new Gedcom.Gedcom(gedcomLines);
         }
 
-        [HttpGet(Name = "GetIndividualRecords")]
+        [HttpGet(Name = "GetGedcom")]
         public IEnumerable<IndividualRecord> Get()
         {
             return Gedcom1.GetIndividualRecords();
         }
 
-        [HttpGet("individual-record/{xrefINDI}")]
-        public IndividualRecord Get(string xrefINDI)
+        [HttpGet("IndividualRecord/{xrefINDI}")]
+        public IndividualRecord GetIndividualRecord(string xrefINDI)
         {
-            return Gedcom1.GetIndividualRecord(xrefINDI);
+            var individualRecord = Gedcom1.GetIndividualRecord(xrefINDI);
+            return individualRecord;
         }
     }
 }

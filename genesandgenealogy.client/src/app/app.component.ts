@@ -28,21 +28,21 @@ interface PersonalNameStructure {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
-  public individualRecord?: IndividualRecord;
-  public someString = "";
+  public individualRecord?: string; // IndividualRecord;
+  public someString = "default";
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    //this.getForecasts();
+    this.getForecasts();
     this.getIndividualRecord("@I262590235338@");
-    //this.getSomeString();
+    this.getSomeString();
   }
 
   getSomeString() {
-    this.http.get<string>('/weatherforecast/somestring/test').subscribe(
+    this.http.get<string>('/weatherforecast/somestring/from-server').subscribe(
       (result) => {
-        this.someString = result;
+        this.someString = (result as any).value;
       },
       (error) => {
         console.error(error);
@@ -62,9 +62,9 @@ export class AppComponent implements OnInit {
   }
 
   getIndividualRecord(xrefINDI: string) {
-    this.http.get<IndividualRecord>('/gedcom/individual-record/' + xrefINDI).subscribe(
+    this.http.get<IndividualRecord>('/gedcom/individualrecord/' + xrefINDI).subscribe(
       (individualRecord) => {
-        this.individualRecord = individualRecord;
+        this.individualRecord = "After server call."; // individualRecord;
       },
       (error) => {
         console.error(error);

@@ -1,3 +1,5 @@
+using Gedcom.RecordStructures;
+using Gedcom;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GenesAndGenealogy.Server.Controllers
@@ -11,11 +13,11 @@ namespace GenesAndGenealogy.Server.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WeatherForecastController> logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -30,10 +32,17 @@ namespace GenesAndGenealogy.Server.Controllers
             .ToArray();
         }
 
-        [HttpGet("SomeString/{xref}")]
-        public string SomeString(string xref)
+        [HttpGet("SomeString/{value}")]
+        public TestSomeStringValue GetSomeString(string value)
         {
-            return $"Individual: {xref}";
+            return new TestSomeStringValue
+            {
+                Value = $"from server: {value}"
+            };
+        }
+        public class TestSomeStringValue
+        {
+            public string Value { get; set; } = "";
         }
     }
 }
