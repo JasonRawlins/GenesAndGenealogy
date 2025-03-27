@@ -26,11 +26,34 @@ namespace GenesAndGenealogy.Server.Controllers
             return Gedcom1.GetIndividualRecords();
         }
 
-        [HttpGet("IndividualRecord/{xrefINDI}")]
+        [HttpGet("individual-records")]
+        public List<IndividualRecord> GetIndividualRecords()
+        {
+            return Gedcom1.GetIndividualRecords();
+        }
+
+        [HttpGet("individual-record-names")]
+        public List<IndividualRecordForDisplay> GetIndividualRecordNames()
+        {
+            return Gedcom1.GetIndividualRecords().Select(ir => new IndividualRecordForDisplay(ir)).ToList();
+        }
+
+        [HttpGet("individual-record/{xrefINDI}")]
         public IndividualRecord GetIndividualRecord(string xrefINDI)
         {
-            var individualRecord = Gedcom1.GetIndividualRecord(xrefINDI);
-            return individualRecord;
+            return Gedcom1.GetIndividualRecord(xrefINDI);
         }
+    }
+
+    public class IndividualRecordForDisplay
+    {
+        public IndividualRecordForDisplay(IndividualRecord individualRecord)
+        {
+            Xref = individualRecord.Xref;
+            PersonalName = individualRecord.PersonalNameStructures[0].NamePersonal;
+        }
+
+        public string Xref { get; set; }
+        public string PersonalName { get; set; }
     }
 }

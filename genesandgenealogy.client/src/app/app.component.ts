@@ -15,9 +15,13 @@ interface IndividualRecord {
   automatedRecordId: string;
   namePersonal: PersonalNameStructure;
 }
-
 interface PersonalNameStructure {
   namePersonal: string;
+}
+
+interface IndividualRecordForDisplay {
+  xref: string;
+  personalName: string;
 }
 
 @Component({
@@ -28,32 +32,22 @@ interface PersonalNameStructure {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
-  public individualRecord?: string; // IndividualRecord;
-  public someString = "default";
+  public individualRecord?: IndividualRecord;
+  public individualRecords?: IndividualRecord[];
+  public individualRecordNames?: IndividualRecordForDisplay[];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getForecasts();
-    this.getIndividualRecord("@I262590235338@");
-    this.getSomeString();
+    //this.getIndividualRecord("@I262590235338@");
+    //this.getIndividualRecords();
+    this.getIndividualRecordNames();
   }
 
-  getSomeString() {
-    this.http.get<string>('/weatherforecast/somestring/from-server').subscribe(
-      (result) => {
-        this.someString = (result as any).value;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
+  getIndividualRecords() {
+    this.http.get<IndividualRecord[]>('/gedcom/individual-records').subscribe(
+      (individualRecords) => {
+        this.individualRecords = individualRecords;
       },
       (error) => {
         console.error(error);
@@ -62,9 +56,20 @@ export class AppComponent implements OnInit {
   }
 
   getIndividualRecord(xrefINDI: string) {
-    this.http.get<IndividualRecord>('/gedcom/individualrecord/' + xrefINDI).subscribe(
+    this.http.get<IndividualRecord>('/gedcom/individual-record/' + xrefINDI).subscribe(
       (individualRecord) => {
-        this.individualRecord = "After server call."; // individualRecord;
+        this.individualRecord = individualRecord;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getIndividualRecordNames() {
+    this.http.get<IndividualRecordForDisplay[]>('/gedcom/individual-record-names').subscribe(
+      (individualRecordNames) => {
+        this.individualRecordNames = individualRecordNames;
       },
       (error) => {
         console.error(error);
