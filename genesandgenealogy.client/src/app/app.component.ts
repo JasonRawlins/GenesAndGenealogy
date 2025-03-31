@@ -1,27 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+class IndividualRecord {
+  xref: string = "";
+  sexValue: string = "";
+  submitter: string = "";
+  automatedRecordId: string = "";
+  personalNameStructures?: PersonalNameStructure[] = [];
+  childToFamilyLinks?: ChildToFamilyLink[] = [];
 }
 
-interface IndividualRecord {
-  xref: string;
-  sexValue: string;
-  submitter: string;
-  automatedRecordId: string;
-  namePersonal: PersonalNameStructure;
-}
 interface PersonalNameStructure {
   namePersonal: string;
+  nameType: string;
+  given: string;
+  namePrefix: string;
+  nameSuffix: string;
+  nickname: string;
+  surname: string;
+  surnamePrefix: string;
 }
 
 interface IndividualRecordForDisplay {
   xref: string;
   personalName: string;
+  given: string;
+  surname: string;
+}
+
+interface ChildToFamilyLink {
+  xref: string;
 }
 
 @Component({
@@ -31,7 +39,6 @@ interface IndividualRecordForDisplay {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
   public individualRecord?: IndividualRecord;
   public individualRecords?: IndividualRecord[];
   public individualRecordNames?: IndividualRecordForDisplay[];
@@ -39,9 +46,9 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    //this.getIndividualRecord("@I262590235338@");
+    this.getIndividualRecord("@I262590235338@");
     //this.getIndividualRecords();
-    this.getIndividualRecordNames();
+    //this.getIndividualRecordNames();
   }
 
   getIndividualRecords() {

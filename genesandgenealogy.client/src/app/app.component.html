@@ -1,10 +1,21 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<h1 id="tableLabel">Gedcom</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<div *ngIf="individualRecord && individualRecord.personalNameStructures">
+  {{individualRecord.personalNameStructures[0].given}}
+  {{individualRecord.personalNameStructures[0].surname}}
+  ({{individualRecord.xref}})
 
+</div>
+
+<!--<h4>Child to Family Links</h4>
 <ul>
-  <li *ngFor="let irn of individualRecordNames">
-    ({{irn?.xref}}) {{irn.personalName}}
+  <li *ngFor="let ctfl of individualRecord?.childToFamilyLinks || []">
+    {{ctfl.xref}}
   </li>
-</ul>
+</ul>-->
 
+<!--<ul>
+  <li *ngFor="let irn of individualRecordNames">
+    ({{irn.xref}}) {{irn.given}} {{irn.surname}}
+  </li>
+</ul>-->
