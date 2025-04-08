@@ -8,6 +8,10 @@ class IndividualRecord {
   automatedRecordId: string = "";
   personalNameStructures?: PersonalNameStructure[] = [];
   childToFamilyLinks?: ChildToFamilyLink[] = [];
+  given: string = "";
+  surname: string = "";
+  birth: string = "";
+  death: string = "";
 }
 
 interface PersonalNameStructure {
@@ -46,7 +50,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getIndividualRecord("@I262590235338@");
+    this.getIndividualRecord("@I262590234298@");
     //this.getIndividualRecords();
     //this.getIndividualRecordNames();
   }

@@ -1,10 +1,15 @@
 <h1 id="tableLabel">Gedcom</h1>
 
-<div *ngIf="individualRecord && individualRecord.personalNameStructures">
-  {{individualRecord.personalNameStructures[0].given}}
-  {{individualRecord.personalNameStructures[0].surname}}
-  ({{individualRecord.xref}})
-
+<div *ngIf="individualRecord">
+  <p>
+    {{individualRecord.given}} {{individualRecord.surname}} ({{individualRecord.xref}})
+  </p>
+  <p>
+    Birth: {{individualRecord.birth}}
+  </p>
+  <p>
+    Death: {{individualRecord.death}}
+  </p>
 </div>
 
 <!--<h4>Child to Family Links</h4>

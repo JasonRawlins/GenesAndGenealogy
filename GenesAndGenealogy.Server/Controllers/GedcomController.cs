@@ -12,6 +12,7 @@ namespace GenesAndGenealogy.Server.Controllers
     {
         private readonly ILogger<GedcomController> _logger;
         private Gedcom.Gedcom Gedcom { get; }
+        public static JsonSerializerOptions JsonSerializerOptions1 { get => JsonSerializerOptions; set => JsonSerializerOptions = value; }
 
         public GedcomController(ILogger<GedcomController> logger)
         {
