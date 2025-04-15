@@ -51,11 +51,10 @@ namespace GenesAndGenealogy.Server.Controllers
         }
 
         [HttpGet("individual-record/{xrefINDI}/families/")]
-        public List<FamilyModel> GetFamilyRecords(string xrefINDI)
+        public List<FamilyModel> GetIndividualFamilies(string xrefINDI)
         {
-            var familyRecords = new List<FamilyRecord>();
-
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
+            var familyRecords = new List<FamilyRecord>();
 
             foreach (var spouseToFamilyLink in individualRecord.SpouseToFamilyLinks)
             {
@@ -67,10 +66,17 @@ namespace GenesAndGenealogy.Server.Controllers
 
             foreach (var familyRecord in familyRecords)
             {
-                var husband = Gedcom.GetIndividualRecord(familyRecord.Husband);
-                var wife = Gedcom.GetIndividualRecord(familyRecord.Wife);
+                var husband = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Husband));
+                var wife = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Wife));
+                var children = new List<IndividualModel>();
 
-                familyModels.Add(new FamilyModel(new IndividualModel(husband), new IndividualModel(wife)));
+                foreach (var childXref in familyRecord.Children)
+                {
+                    var childIndividualRecord = Gedcom.GetIndividualRecord(childXref);
+                    children.Add(new IndividualModel(childIndividualRecord));
+                }
+
+                familyModels.Add(new FamilyModel(husband, wife, children));
             }
 
             return familyModels;

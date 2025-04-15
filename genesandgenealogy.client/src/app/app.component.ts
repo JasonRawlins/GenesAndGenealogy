@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
-import { IndividualRecord } from '../gedcom/individual-record';
-import { FamilyRecord } from '../gedcom/family-record';
+import { IndividualRecord } from '../gedcom/IndividualRecord';
+import { FamilyRecord } from '../gedcom/FamilyRecord';
 import { FamilyModel } from '../view-models/FamilyModel';
 import { IndividualModel } from '../view-models/IndividualModel';
 import { GedcomService } from './gedcom.service';
@@ -24,7 +24,9 @@ export class AppComponent implements OnInit {
   constructor(private gedcomService: GedcomService) { }
 
   ngOnInit() {
-    this.getIndividualRecord("@I262590234298@");
+    //this.getIndividualRecord("@I262590234298@"); // JSD
+    //this.getIndividualRecord("@I262590234257@"); // B
+    this.getIndividualRecord("@I262590233314@"); // JS
 
     //this.getIndividualRecords();
   }

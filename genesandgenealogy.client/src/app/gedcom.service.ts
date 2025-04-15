@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IndividualRecord } from '../gedcom/individual-record';
-import { FamilyRecord } from '../gedcom/family-record';
+import { IndividualRecord } from '../gedcom/IndividualRecord';
+import { FamilyRecord } from '../gedcom/FamilyRecord';
 import { IndividualModel } from '../view-models/IndividualModel';
 import { FamilyModel } from "../view-models/FamilyModel";
 

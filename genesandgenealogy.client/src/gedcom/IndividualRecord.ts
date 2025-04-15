@@ -1,6 +1,6 @@
-import { ChildToFamilyLink } from "./child-to-family-link";
-import { PersonalNameStructure } from "./personal-name-structure";
-import { SpouseToFamilyLink } from "./spouse-to-family-link";
+import { ChildToFamilyLink } from "./ChildToFamilyLink";
+import { PersonalNameStructure } from "./PersonalNameStructure";
+import { SpouseToFamilyLink } from "./SpouseToFamilyLink";
 
 export class IndividualRecord {
   xref: string = "";
