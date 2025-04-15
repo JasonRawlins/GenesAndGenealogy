@@ -54,6 +54,35 @@ namespace GenesAndGenealogy.Server.Controllers
             var individualRecord =  Gedcom.GetIndividualRecord(xrefINDI);
             return individualRecord;
         }
+
+        [HttpGet("family-records/{xrefINDI}")]
+        public List<FamilyDisplay> GetFamilyRecords(string xrefINDI)
+        {
+            var familyRecords = new List<FamilyRecord>();
+
+            var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
+
+            foreach (var spouseToFamilyLink in individualRecord.SpouseToFamilyLinks)
+            {
+                var familyRecord = Gedcom.GetFamilyRecord(spouseToFamilyLink.Xref);
+                familyRecords.Add(familyRecord);
+            }
+
+            var familyDisplays = new List<FamilyDisplay>();
+
+            foreach (var familyRecord in familyRecords)
+            {
+                var husband = Gedcom.GetIndividualRecord(familyRecord.Husband);
+                var wife = Gedcom.GetIndividualRecord(familyRecord.Wife);
+
+                familyDisplays.Add(new FamilyDisplay(
+                    $"{husband.PersonalNameStructures[0].Given} {husband.PersonalNameStructures[0].Surname}",
+                    $"{wife.PersonalNameStructures[0].Given} {wife.PersonalNameStructures[0].Surname}"
+                ));
+            }
+
+            return familyDisplays;
+        }
     }
 
     public class IndividualRecordForDisplay
@@ -70,5 +99,17 @@ namespace GenesAndGenealogy.Server.Controllers
         public string PersonalName { get; set; }
         public string Given { get; set; }
         public string Surname { get; set; }
+    }
+
+    public class FamilyDisplay
+    {
+        public FamilyDisplay(string husband, string wife)
+        {
+            Husband = husband;
+            Wife = wife;
+        }
+
+        public string Husband { get; set; }
+        public string Wife { get; set; }
     }
 }

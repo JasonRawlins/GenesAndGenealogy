@@ -10,6 +10,17 @@
   <p>
     Death: {{individualRecord.death}}
   </p>
+  <div *ngIf="familyDisplays">
+    <div *ngFor="let familyDisplay of familyDisplays">
+      <p>
+        Husband: {{familyDisplay.husband}}
+      </p>
+      <p>
+        Wife: {{familyDisplay.wife}}
+      </p>
+    </div>
+  </div>
+
 </div>
 
 <!--<h4>Child to Family Links</h4>
@@ -18,7 +29,6 @@
     {{ctfl.xref}}
   </li>
 </ul>-->
-
 <!--<ul>
   <li *ngFor="let irn of individualRecordNames">
     ({{irn.xref}}) {{irn.given}} {{irn.surname}}
