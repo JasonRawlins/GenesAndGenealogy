@@ -3,6 +3,7 @@ using Gedcom.RecordStructures;
 using Gedcom;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using GenesAndGenealogy.Server.ViewModels;
 
 namespace GenesAndGenealogy.Server.Controllers
 {
@@ -42,12 +43,6 @@ namespace GenesAndGenealogy.Server.Controllers
             return Gedcom.GetIndividualRecords();
         }
 
-        [HttpGet("individual-record-names")]
-        public List<IndividualRecordForDisplay> GetIndividualRecordNames()
-        {
-            return Gedcom.GetIndividualRecords().Select(ir => new IndividualRecordForDisplay(ir)).ToList();
-        }
-
         [HttpGet("individual-record/{xrefINDI}")]
         public IndividualRecord GetIndividualRecord(string xrefINDI)
         {
@@ -55,8 +50,8 @@ namespace GenesAndGenealogy.Server.Controllers
             return individualRecord;
         }
 
-        [HttpGet("family-records/{xrefINDI}")]
-        public List<FamilyDisplay> GetFamilyRecords(string xrefINDI)
+        [HttpGet("individual-record/{xrefINDI}/families/")]
+        public List<FamilyModel> GetFamilyRecords(string xrefINDI)
         {
             var familyRecords = new List<FamilyRecord>();
 
@@ -68,48 +63,17 @@ namespace GenesAndGenealogy.Server.Controllers
                 familyRecords.Add(familyRecord);
             }
 
-            var familyDisplays = new List<FamilyDisplay>();
+            var familyModels = new List<FamilyModel>();
 
             foreach (var familyRecord in familyRecords)
             {
                 var husband = Gedcom.GetIndividualRecord(familyRecord.Husband);
                 var wife = Gedcom.GetIndividualRecord(familyRecord.Wife);
 
-                familyDisplays.Add(new FamilyDisplay(
-                    $"{husband.PersonalNameStructures[0].Given} {husband.PersonalNameStructures[0].Surname}",
-                    $"{wife.PersonalNameStructures[0].Given} {wife.PersonalNameStructures[0].Surname}"
-                ));
+                familyModels.Add(new FamilyModel(new IndividualModel(husband), new IndividualModel(wife)));
             }
 
-            return familyDisplays;
+            return familyModels;
         }
-    }
-
-    public class IndividualRecordForDisplay
-    {
-        public IndividualRecordForDisplay(IndividualRecord individualRecord)
-        {
-            Xref = individualRecord.Xref;
-            PersonalName = individualRecord.PersonalNameStructures[0].NamePersonal;
-            Given = individualRecord.PersonalNameStructures[0].Given;
-            Surname = individualRecord.PersonalNameStructures[0].Surname;
-        }
-
-        public string Xref { get; set; }
-        public string PersonalName { get; set; }
-        public string Given { get; set; }
-        public string Surname { get; set; }
-    }
-
-    public class FamilyDisplay
-    {
-        public FamilyDisplay(string husband, string wife)
-        {
-            Husband = husband;
-            Wife = wife;
-        }
-
-        public string Husband { get; set; }
-        public string Wife { get; set; }
     }
 }
