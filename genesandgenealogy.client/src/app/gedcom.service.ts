@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IndividualRecord } from '../gedcom/IndividualRecord';
-import { FamilyRecord } from '../gedcom/FamilyRecord';
 import { IndividualModel } from '../view-models/IndividualModel';
 import { FamilyModel } from "../view-models/FamilyModel";
 
@@ -10,19 +8,19 @@ export class GedcomService {
   
   constructor(private http: HttpClient) { }
 
-  getIndividualRecords() {
-    return this.http.get<IndividualRecord[]>("/gedcom/individual-records");
+  getIndividuals() {
+    return this.http.get<IndividualModel[]>("/gedcom/individuals");
   }
 
-  getIndividualRecord(xrefINDI: string) {
-    return this.http.get<IndividualRecord>(`/gedcom/individual-record/${xrefINDI}`);
+  getIndividual(xrefINDI: string) {
+    return this.http.get<IndividualModel>(`/gedcom/individual/${xrefINDI}`);
   }
 
-  getIndividualFamilyRecords(xrefINDI: string) {
-    return this.http.get<FamilyModel[]>(`/gedcom/individual-record/${xrefINDI}/families`);
+  getIndividualFamilies(xrefINDI: string) {
+    return this.http.get<FamilyModel[]>(`/gedcom/individual/${xrefINDI}/families`);
   }
 
-  getFamilyRecord(xrefFAM: string) {
-    return this.http.get<FamilyRecord>(`/gedcom/family-record/${xrefFAM}`);
+  getFamily(xrefFAM: string) {
+    return this.http.get<FamilyModel>(`/gedcom/family/${xrefFAM}`);
   }
 }

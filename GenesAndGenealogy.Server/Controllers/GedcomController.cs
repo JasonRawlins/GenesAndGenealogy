@@ -13,7 +13,12 @@ namespace GenesAndGenealogy.Server.Controllers
     {
         private readonly ILogger<GedcomController> _logger;
         private Gedcom.Gedcom Gedcom { get; }
-        public static JsonSerializerOptions JsonSerializerOptions1 { get => JsonSerializerOptions; set => JsonSerializerOptions = value; }
+        //private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
+        //{
+        //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        //    WriteIndented = true,
+        //    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        //};
 
         public GedcomController(ILogger<GedcomController> logger)
         {
@@ -24,33 +29,31 @@ namespace GenesAndGenealogy.Server.Controllers
             Gedcom = new Gedcom.Gedcom(gedcomLines);
         }
 
-        private static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-        };
-
         [HttpGet(Name = "GetGedcom")]
-        public IEnumerable<IndividualRecord> Get()
+        public IEnumerable<IndividualModel> Get()
         {
-            return Gedcom.GetIndividualRecords();
+            return Gedcom.GetIndividualRecords().Select(ir => new IndividualModel(ir));
         }
 
-        [HttpGet("individual-records")]
-        public List<IndividualRecord> GetIndividualRecords()
+        [HttpGet("individual")]
+        public List<IndividualModel> GetIndividuals()
         {
-            return Gedcom.GetIndividualRecords();
+            return Gedcom.GetIndividualRecords().Select(ir => {
+                var individualModel = new IndividualModel(ir);
+                individualModel.TreeAutomatedRecordId = Gedcom.Header.Tree.AutomatedRecordId;
+                return individualModel;
+            }).ToList();
         }
 
-        [HttpGet("individual-record/{xrefINDI}")]
-        public IndividualRecord GetIndividualRecord(string xrefINDI)
+        [HttpGet("individual/{xrefINDI}")]
+        public IndividualModel GetIndividual(string xrefINDI)
         {
-            var individualRecord =  Gedcom.GetIndividualRecord(xrefINDI);
-            return individualRecord;
+            var individualModel = new IndividualModel(Gedcom.GetIndividualRecord(xrefINDI));
+            individualModel.TreeAutomatedRecordId = Gedcom.Header.Source.Tree.AutomatedRecordId;
+            return individualModel;
         }
 
-        [HttpGet("individual-record/{xrefINDI}/families/")]
+        [HttpGet("individual/{xrefINDI}/families/")]
         public List<FamilyModel> GetIndividualFamilies(string xrefINDI)
         {
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);

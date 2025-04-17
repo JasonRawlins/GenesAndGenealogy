@@ -1,38 +1,28 @@
 <h1 id="tableLabel"></h1>
 
-<div *ngIf="individualRecord">
+<div *ngIf="individual">
   <p>
-    <strong>{{individualRecord.given}} {{individualRecord.surname}}</strong> ({{individualRecord.xref}})
+    <a href="{{Ancestry.createAncestryIndividualLink(individual.treeAutomatedRecordId, individual.xref)}}" target="_blank">
+      <strong>{{individual.given}} {{individual.surname}}</strong>
+    </a>
   </p>
   <p>
-    <strong>Birth</strong>: {{individualRecord.birth}}
+    <strong>Birth</strong>: {{individual.birth}}
   </p>
   <p>
-    <strong>Death</strong>: {{individualRecord.death}}
+    <strong>Death</strong>: {{individual.death}}
   </p>
-  <div *ngIf="familyModels">
-    <div *ngFor="let familyModel of familyModels">
-      <p *ngIf="individualRecord.xref !== familyModel.husband.xref">
-        <strong>Husband</strong>: {{familyModel.husband.given}} {{familyModel.husband.surname}}
+  <div *ngIf="families">
+    <div *ngFor="let family of families">
+      <p *ngIf="individual.xref !== family.husband.xref">
+        <strong>Husband</strong>: {{family.husband.given}} {{family.husband.surname}}
       </p>
-      <p *ngIf="individualRecord.xref !== familyModel.wife.xref">
-        <strong>Wife</strong>: {{familyModel.wife.given}} {{familyModel.wife.surname}}
+      <p *ngIf="individual.xref !== family.wife.xref">
+        <strong>Wife</strong>: {{family.wife.given}} {{family.wife.surname}}
       </p>
-      <p *ngFor="let child of familyModel.children">
+      <p *ngFor="let child of family.children">
         &nbsp;&nbsp;&nbsp;&nbsp;{{child.given}} {{child.surname}}
       </p>
     </div>
   </div>
 </div>
-
-<!--<h4>Child to Family Links</h4>
-<ul>
-  <li *ngFor="let ctfl of individualRecord?.childToFamilyLinks || []">
-    {{ctfl.xref}}
-  </li>
-</ul>-->
-<!--<ul>
-  <li *ngFor="let irn of individualRecordNames">
-    ({{irn.xref}}) {{irn.given}} {{irn.surname}}
-  </li>
-</ul>-->

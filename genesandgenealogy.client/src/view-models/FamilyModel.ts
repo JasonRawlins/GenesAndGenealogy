@@ -1,7 +1,7 @@
-import { IndividualRecord } from "../gedcom/IndividualRecord";
+import { IndividualModel } from "./IndividualModel";
 
 export interface FamilyModel {
-  husband: IndividualRecord;
-  wife: IndividualRecord;
-  children: IndividualRecord[];
+  husband: IndividualModel;
+  wife: IndividualModel;
+  children: IndividualModel[];
 }

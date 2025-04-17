@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
-import { IndividualRecord } from '../gedcom/IndividualRecord';
-import { FamilyRecord } from '../gedcom/FamilyRecord';
 import { FamilyModel } from '../view-models/FamilyModel';
 import { IndividualModel } from '../view-models/IndividualModel';
 import { GedcomService } from './gedcom.service';
+import * as Ancestry from '../common/Ancestry';
 
 @Component({
   selector: 'app-root',
@@ -15,38 +14,38 @@ import { GedcomService } from './gedcom.service';
 })
 
 export class AppComponent implements OnInit {
-  public individualRecord?: IndividualRecord;
-  public familyModels: FamilyModel[] = [];
+  public individual?: IndividualModel;
+  public families: FamilyModel[] = [];
   //public familyRecords: FamilyRecord[] = [];
-  public individualRecords: IndividualRecord[] = [];
-  public individualRecordNames: IndividualModel[] = [];
+  public individuals: IndividualModel[] = [];
+  public Ancestry = Ancestry;
 
   constructor(private gedcomService: GedcomService) { }
 
   ngOnInit() {
     //this.getIndividualRecord("@I262590234298@"); // JSD
     //this.getIndividualRecord("@I262590234257@"); // B
-    this.getIndividualRecord("@I262590233314@"); // JS
+    this.getIndividual("@I262590233314@"); // JS
 
     //this.getIndividualRecords();
   }
 
-  getIndividualRecords() {
-    this.gedcomService.getIndividualRecords().subscribe(
-      (individualRecords) => {
-        this.individualRecords = individualRecords;
+  getIndividuals() {
+    this.gedcomService.getIndividuals().subscribe(
+      (individuals) => {
+        this.individuals = individuals;
       }
     );
   }
 
-  getIndividualRecord(xrefINDI: string) {
-    this.gedcomService.getIndividualRecord(xrefINDI).pipe(
-      switchMap(individualRecord => {
-        this.individualRecord = individualRecord;
-        return this.gedcomService.getIndividualFamilyRecords(individualRecord.xref);
+  getIndividual(xrefINDI: string) {
+    this.gedcomService.getIndividual(xrefINDI).pipe(
+      switchMap(individual => {
+        this.individual = individual;
+        return this.gedcomService.getIndividualFamilies(individual.xref);
       })
-    ).subscribe(familyModels => {
-      this.familyModels = familyModels;
+    ).subscribe(families => {
+      this.families = families;
     });
   }
 
