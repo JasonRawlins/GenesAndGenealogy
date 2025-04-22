@@ -1,6 +1,5 @@
 export interface IndividualModel {
   xref: string;
-  treeAutomatedRecordId: string;
   automatedRecordId: string;
   birth: Date;
   death: Date;

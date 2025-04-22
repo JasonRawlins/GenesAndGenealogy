@@ -40,7 +40,8 @@ namespace GenesAndGenealogy.Server.Controllers
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
             var familyModels = GetFamilyModels(individualRecord);
             var individualModel = new IndividualModel(individualRecord);
-            var profileModel = new ProfileModel(TreeModel, individualModel, familyModels);
+            var eventModels = individualRecord.IndividualEventStructures.Select(ies => new EventModel(ies)).ToList();
+            var profileModel = new ProfileModel(TreeModel, individualModel, familyModels, eventModels);
 
             return profileModel;
         }

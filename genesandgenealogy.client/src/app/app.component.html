@@ -13,6 +13,13 @@
     <strong>Death</strong>: {{profile.individual.death}}
   </p>
   <div>
+    <h3>Events</h3>
+    <div *ngFor="let event of profile.events">
+      {{event.name}} {{event.dateValue}}
+    </div>
+  </div>
+  <div>
+    <h3>Spouses and Children</h3>
     <div *ngFor="let family of profile.families">
       <p *ngIf="profile.individual.xref !== family.partner1.xref">
         <strong>Partner 1</strong>: {{family.partner1.given}} {{family.partner1.surname}}

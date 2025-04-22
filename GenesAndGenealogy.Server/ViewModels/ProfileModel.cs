@@ -2,16 +2,18 @@ namespace GenesAndGenealogy.Server.ViewModels;
 
 public class ProfileModel
 {
-    public ProfileModel(TreeModel treeModel, IndividualModel individualModel, List<FamilyModel> families)
+    public ProfileModel(TreeModel treeModel, IndividualModel individualModel, List<FamilyModel> familyModels, List<EventModel> eventModels)
     {
-        TreeModel = treeModel;
+        Events = eventModels;
+        Families = familyModels;
         Individual = individualModel;
-        Families = families;
+        TreeModel = treeModel;
     }
 
-    public TreeModel TreeModel { get; set; }
-    public IndividualModel Individual { get; set; }
+    public List<EventModel> Events { get; set; }
     public List<FamilyModel> Families { get; set; }
+    public IndividualModel Individual { get; set; }
+    public TreeModel TreeModel { get; set; }
 
     public string AncestryLink
     {
