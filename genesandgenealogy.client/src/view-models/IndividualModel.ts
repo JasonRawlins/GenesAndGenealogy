@@ -9,6 +9,4 @@ export interface IndividualModel {
   sexValue: string;
   submitter: string;
   surname: string;
-  // Children
-  // Marriages
 }

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { IndividualModel } from '../view-models/IndividualModel';
 import { FamilyModel } from "../view-models/FamilyModel";
+import { ProfileModel } from "../view-models/ProfileModel";
 
 @Injectable()
 export class GedcomService {
@@ -12,8 +13,8 @@ export class GedcomService {
     return this.http.get<IndividualModel[]>("/gedcom/individuals");
   }
 
-  getIndividual(xrefINDI: string) {
-    return this.http.get<IndividualModel>(`/gedcom/individual/${xrefINDI}`);
+  getProfile(xrefINDI: string) {
+    return this.http.get<ProfileModel>(`/gedcom/profile/${xrefINDI}`);
   }
 
   getIndividualFamilies(xrefINDI: string) {

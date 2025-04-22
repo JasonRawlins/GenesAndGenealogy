@@ -19,7 +19,6 @@ public class IndividualModel
 
     public string Xref { get; set; }
     public string AutomatedRecordId { get; set; }
-    public string TreeAutomatedRecordId { get; set; }
     public DateTime Birth { get; set; }
     public DateTime Death { get; set; }
     public string Given { get; set; }

@@ -1,22 +1,20 @@
-using Gedcom.RecordStructures;
-
 namespace GenesAndGenealogy.Server.ViewModels;
 
 public class FamilyModel
 {
-    public FamilyModel(IndividualModel husband, IndividualModel wife)
+    public FamilyModel(IndividualModel partner1, IndividualModel partner2)
     {
-        Husband = husband;
-        Wife = wife;
+        Partner1 = partner1;
+        Partner2 = partner2;
         Children = new List<IndividualModel>();
     }
 
-    public FamilyModel(IndividualModel husband, IndividualModel wife, List<IndividualModel> children) : this(husband, wife)
+    public FamilyModel(IndividualModel partner1, IndividualModel partner2, List<IndividualModel> children) : this(partner1, partner2)
     {
         Children = children;
     }
 
-    public IndividualModel Husband { get; set; }
-    public IndividualModel Wife { get; set; }
+    public IndividualModel Partner1 { get; set; }
+    public IndividualModel Partner2 { get; set; }
     public List<IndividualModel> Children { get; set; }
 }
