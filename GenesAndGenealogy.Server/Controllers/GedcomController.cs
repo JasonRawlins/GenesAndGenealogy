@@ -11,6 +11,7 @@ namespace GenesAndGenealogy.Server.Controllers
     {
         private readonly ILogger<GedcomController> _logger;
         private Gedcom.Gedcom Gedcom { get; }
+        private TreeModel TreeModel => new TreeModel(Gedcom.Header.Source.Tree);
 
         public GedcomController(ILogger<GedcomController> logger)
         {
@@ -19,11 +20,6 @@ namespace GenesAndGenealogy.Server.Controllers
             var gedFileLines = System.IO.File.ReadAllLines(@"C:\temp\Gedcom.NET\Resources\DeveloperTree.ged");
             var gedcomLines = gedFileLines.Select(GedcomLine.ParseLine).ToList();
             Gedcom = new Gedcom.Gedcom(gedcomLines);
-        }
-
-        private TreeModel GetTreeModel()
-        {
-            return new TreeModel(Gedcom.Header.Source.Tree);
         }
 
         [HttpGet(Name = "GetGedcom")]
@@ -44,45 +40,19 @@ namespace GenesAndGenealogy.Server.Controllers
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
             var familyModels = GetFamilyModels(individualRecord);
             var individualModel = new IndividualModel(individualRecord);
-            var profileModel = new ProfileModel(GetTreeModel(), individualModel, familyModels);
+            var profileModel = new ProfileModel(TreeModel, individualModel, familyModels);
 
             return profileModel;
-        }
-
-        public List<FamilyModel> GetFamilyModels(IndividualRecord individualRecord)
-        {
-            var familyRecords = new List<FamilyRecord>();
-
-            foreach (var spouseToFamilyLink in individualRecord.SpouseToFamilyLinks)
-            {
-                var familyRecord = Gedcom.GetFamilyRecord(spouseToFamilyLink.Xref);
-                familyRecords.Add(familyRecord);
-            }
-
-            var familyModels = new List<FamilyModel>();
-
-            foreach (var familyRecord in familyRecords)
-            {
-                var partner1 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Husband));
-                var partner2 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Wife));
-                var children = new List<IndividualModel>();
-
-                foreach (var childXref in familyRecord.Children)
-                {
-                    var childIndividualRecord = Gedcom.GetIndividualRecord(childXref);
-                    children.Add(new IndividualModel(childIndividualRecord));
-                }
-
-                familyModels.Add(new FamilyModel(partner1, partner2, children));
-            }
-
-            return familyModels;
         }
 
         [HttpGet("individual/{xrefINDI}/families/")]
         public List<FamilyModel> GetIndividualFamilies(string xrefINDI)
         {
-            var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
+            return GetFamilyModels(Gedcom.GetIndividualRecord(xrefINDI));
+        }
+
+        private List<FamilyModel> GetFamilyModels(IndividualRecord individualRecord)
+        {
             var familyRecords = new List<FamilyRecord>();
 
             foreach (var spouseToFamilyLink in individualRecord.SpouseToFamilyLinks)
