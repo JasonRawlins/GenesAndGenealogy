@@ -1,9 +1,9 @@
-import { DateModel } from "./DateModel";
+import { GedcomDate } from "./GedcomDate";
 
-export interface EventModel {
+export interface Event {
   ageAtEvent: string;
   causeOfEvent: string;
-  gedcomDate: DateModel;  
+  gedcomDate: GedcomDate;  
   eventOrFactClassification: string;
   name: string;
   religiousAffiliation: string;

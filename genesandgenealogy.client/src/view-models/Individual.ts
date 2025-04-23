@@ -1,10 +1,10 @@
-import { DateModel } from "./DateModel";
+import { GedcomDate } from "./GedcomDate";
 
-export interface IndividualModel {
+export interface Individual {
   xref: string;
   automatedRecordId: string;
-  birth: DateModel;
-  death: DateModel;
+  birth: GedcomDate;
+  death: GedcomDate;
   given: string;
   personalName: string;
   sexValue: string;

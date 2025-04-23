@@ -1,4 +1,4 @@
-export interface TreeModel {
+export interface Tree {
   automatedRecordId: string;
   name: string;
 }

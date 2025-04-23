@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GedcomService } from './gedcom.service';
-import { ProfileModel } from '../view-models/ProfileModel';
+import { Profile } from '../view-models/Profile';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { ProfileModel } from '../view-models/ProfileModel';
 })
 
 export class AppComponent implements OnInit {
-  public profile?: ProfileModel;
+  public profile?: Profile;
 
   constructor(private gedcomService: GedcomService) { }
 

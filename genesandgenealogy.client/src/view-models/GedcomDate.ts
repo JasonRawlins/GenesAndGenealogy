@@ -1,4 +1,4 @@
-export interface DateModel {
+export interface GedcomDate {
   day: number;
   month: number;
   monthName: string;
