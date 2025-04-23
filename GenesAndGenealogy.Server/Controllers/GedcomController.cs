@@ -43,7 +43,8 @@ namespace GenesAndGenealogy.Server.Controllers
             var eventModels = individualRecord.IndividualEventStructures
                 .OrderBy(ies => ies.GedcomDate)
                 .Select(ies => new EventModel(ies)).ToList();
-            var profileModel = new ProfileModel(TreeModel, individualModel, familyModels, eventModels);
+            var repositories = Gedcom.GetRepositoryRecords().Select(r => new RepositoryModel(r)).ToList();
+            var profileModel = new ProfileModel(TreeModel, individualModel, familyModels, eventModels, repositories);
 
             return profileModel;
         }

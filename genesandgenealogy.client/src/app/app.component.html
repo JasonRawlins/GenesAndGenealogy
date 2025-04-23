@@ -6,13 +6,20 @@
       <strong>{{profile.individual.given}} {{profile.individual.surname}}</strong>
     </a>
   </p>
-  <p>
-    <strong>Birth</strong>: {{profile.individual.birth.dayMonthYear}}
-  </p>
-  <p>
-    <strong>Death</strong>: {{profile.individual.death.dayMonthYear}}
-  </p>
+  {{profile.individual.birth.dayMonthYear}} - {{profile.individual.death.dayMonthYear}}
   <div>
+    <h3>Repositories</h3>
+    <ul>
+      <li *ngFor="let repository of profile.repositories">
+        {{repository.name}} ({{repository.xref}})<br />
+        <span *ngFor="let email of repository.emails">{{email}}</span>
+        <span *ngFor="let faxNumber of repository.faxNumbers">{{faxNumber}}</span>
+        <span *ngFor="let webPage of repository.webPages">{{webPage}}</span>
+        <span *ngFor="let phoneNumber of repository.phoneNumbers">{{phoneNumber}}</span>
+      </li>
+    </ul>
+  </div>
+  <!--<div>
     <h3>Events</h3>
     <ul>
       <li *ngFor="let event of profile.events">
@@ -60,5 +67,5 @@
         </li>
       </ul>
     </div>
-  </div>
+  </div>-->
 </div>
