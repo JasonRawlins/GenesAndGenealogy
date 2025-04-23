@@ -19,8 +19,8 @@ public class IndividualModel
 
     public string Xref { get; set; }
     public string AutomatedRecordId { get; set; }
-    public DateTime Birth { get; set; }
-    public DateTime Death { get; set; }
+    public GedcomDate Birth { get; set; }
+    public GedcomDate Death { get; set; }
     public string Given { get; set; }
     public string PersonalName { get; set; }
     public string SexValue { get; set; }

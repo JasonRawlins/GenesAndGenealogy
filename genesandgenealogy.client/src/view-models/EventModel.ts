@@ -1,7 +1,9 @@
+import { DateModel } from "./DateModel";
+
 export interface EventModel {
   ageAtEvent: string;
   causeOfEvent: string;
-  dateValue: string;  
+  gedcomDate: DateModel;  
   eventOrFactClassification: string;
   name: string;
   religiousAffiliation: string;

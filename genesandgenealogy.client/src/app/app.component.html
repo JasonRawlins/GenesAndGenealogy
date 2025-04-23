@@ -7,15 +7,15 @@
     </a>
   </p>
   <p>
-    <strong>Birth</strong>: {{profile.individual.birth}}
+    <strong>Birth</strong>: {{profile.individual.birth.dayMonthYear}}
   </p>
   <p>
-    <strong>Death</strong>: {{profile.individual.death}}
+    <strong>Death</strong>: {{profile.individual.death.dayMonthYear}}
   </p>
   <div>
     <h3>Events</h3>
     <div *ngFor="let event of profile.events">
-      {{event.name}} {{event.dateValue}}
+      {{event.name}} {{event.gedcomDate.dayMonthYear}}
     </div>
   </div>
   <div>
@@ -27,9 +27,11 @@
       <p *ngIf="profile.individual.xref !== family.partner2.xref">
         <strong>Partner 2</strong>: {{family.partner2.given}} {{family.partner2.surname}}
       </p>
-      <p *ngFor="let child of family.children">
-        &nbsp;&nbsp;&nbsp;&nbsp;{{child.given}} {{child.surname}}
-      </p>
+      <ul>
+        <li *ngFor="let child of family.children">
+          &nbsp;&nbsp;&nbsp;&nbsp;{{child.given}} {{child.surname}}
+        </li>
+      </ul>
     </div>
   </div>
 </div>

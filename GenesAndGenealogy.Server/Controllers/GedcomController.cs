@@ -18,7 +18,7 @@ namespace GenesAndGenealogy.Server.Controllers
             _logger = logger;
 
             var gedFileLines = System.IO.File.ReadAllLines(@"C:\temp\Gedcom.NET\Resources\DeveloperTree.ged");
-            var gedcomLines = gedFileLines.Select(GedcomLine.ParseLine).ToList();
+            var gedcomLines = gedFileLines.Select(GedcomLine.Parse).ToList();
             Gedcom = new Gedcom.Gedcom(gedcomLines);
         }
 
@@ -40,7 +40,9 @@ namespace GenesAndGenealogy.Server.Controllers
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
             var familyModels = GetFamilyModels(individualRecord);
             var individualModel = new IndividualModel(individualRecord);
-            var eventModels = individualRecord.IndividualEventStructures.Select(ies => new EventModel(ies)).ToList();
+            var eventModels = individualRecord.IndividualEventStructures
+                .OrderBy(ies => ies.GedcomDate)
+                .Select(ies => new EventModel(ies)).ToList();
             var profileModel = new ProfileModel(TreeModel, individualModel, familyModels, eventModels);
 
             return profileModel;
