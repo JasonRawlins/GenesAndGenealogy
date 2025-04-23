@@ -39,8 +39,5 @@ public class IndividualModel
     private string TreeId { get; set; }
     public string Xref { get; set; }
 
-    public override string ToString()
-    {
-        return $"{FullName} ({Birth.DayMonthYear}-{Death.DayMonthYear})";
-    }
+    public override string ToString() => $"{FullName} ({Birth.DayMonthYear}-{Death.DayMonthYear})";
 }

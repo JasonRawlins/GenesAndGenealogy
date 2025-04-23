@@ -21,8 +21,5 @@ public class DateModel
     public string DayMonthYear { get; set; }
     public string Time { get; set; }
 
-    public override string ToString()
-    {
-        return DayMonthYear;
-    }
+    public override string ToString() => DayMonthYear;
 }

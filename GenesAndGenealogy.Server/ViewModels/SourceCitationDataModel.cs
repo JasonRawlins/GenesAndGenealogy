@@ -13,8 +13,5 @@ public class SourceCitationDataModel
     public string EntryRecordingDate { get; set; }
     public List<string> TextFromSources { get; set; }
 
-    public override string ToString()
-    {
-        return $"{TextFromSources.First().Substring(0, 64)}";
-    }
+    public override string ToString() => $"{EntryRecordingDate}, {TextFromSources.First().Substring(0, 64)}";
 }

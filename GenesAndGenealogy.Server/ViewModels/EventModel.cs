@@ -37,8 +37,5 @@ public class EventModel
     public List<SourceCitationModel> SourceCitations { get; set; }
     public string Tag { get; set; }
 
-    public override string ToString()
-    {
-        return Name;
-    }
+    public override string ToString() => Name;
 }

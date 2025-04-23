@@ -18,8 +18,5 @@ public class PlaceModel
     public MapModel Map { get; set; }
     public List<string> Notes { get; set; }
 
-    public override string ToString()
-    {
-        return Name;
-    }
+    public override string ToString() => Name;
 }

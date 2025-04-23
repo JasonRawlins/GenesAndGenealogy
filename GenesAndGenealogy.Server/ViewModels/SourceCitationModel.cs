@@ -18,8 +18,5 @@ public class SourceCitationModel
     public List<string>? Notes { get; set; }
     public string? WhereWithinSource { get; set; }
 
-    public override string ToString()
-    {
-        return WhereWithinSource?.Substring(0, 64) ?? "Empty";
-    }
+    public override string ToString() => $"{WhereWithinSource?.Substring(0, 64) ?? "Empty"}";
 }

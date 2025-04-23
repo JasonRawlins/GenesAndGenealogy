@@ -6,4 +6,6 @@ public class TEMPLATEModel
     {
         
     }
+
+    public override string ToString() => "TEMPLATEModel";
 }

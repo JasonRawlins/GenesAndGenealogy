@@ -13,8 +13,5 @@ public class MapModel
     public string Latitude { get; set; }
     public string Longitude { get; set; }
 
-    public override string ToString()
-    {
-        return $"({Latitude}, {Longitude})";
-    }
+    public override string ToString() => $"({Latitude}, {Longitude})";
 }

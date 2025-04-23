@@ -15,8 +15,5 @@ public class ProfileModel
     public IndividualModel Individual { get; set; }
     public TreeModel TreeModel { get; set; }
 
-    public override string ToString()
-    {
-        return $"{Individual.Given} {Individual.Surname}";
-    }
+    public override string ToString() => $"{Individual.Given} {Individual.Surname}";
 }
