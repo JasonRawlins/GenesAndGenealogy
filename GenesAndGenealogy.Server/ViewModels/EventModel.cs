@@ -1,7 +1,4 @@
 using Gedcom.RecordStructures;
-using Gedcom;
-using System.Runtime.Intrinsics.X86;
-using System;
 
 namespace GenesAndGenealogy.Server.ViewModels;
 
@@ -16,14 +13,13 @@ public class EventModel
         EventOrFactClassification = individualEventStructure.EventOrFactClassification;
         // MultimediaLinks
         Name = individualEventStructure.Name;
-        // NoteStuctures
-        // PlaceStructure
+        Notes = individualEventStructure.NoteStructures.Select(ns => ns.Text).ToList();
+        Place = new PlaceModel(individualEventStructure.PlaceStructure);
         ReligiousAffiliation = individualEventStructure.ReligiousAffiliation;
         ResponsibleAgency = individualEventStructure.ResponsibleAgency;
         RestrictionNotice = individualEventStructure.RestrictionNotice;
         // SourceCitations
         Tag = individualEventStructure.Tag;
-
     }
 
     //public AddressStructure AddressStructure { get; set; }
@@ -33,8 +29,8 @@ public class EventModel
     public string EventOrFactClassification { get; set; }
     //public List<MultimediaLink> MultimediaLinks { get; set; }
     public string Name { get; set; }
-    //public List<NoteStructure> NoteStructures { get; set; }
-    //public PlaceStructure PlaceStructure { get; set; }
+    public List<string> Notes { get; set; }
+    public PlaceModel Place { get; set; }
     public string ReligiousAffiliation { get; set; }
     public string ResponsibleAgency { get; set; }
     public string RestrictionNotice { get; set; }

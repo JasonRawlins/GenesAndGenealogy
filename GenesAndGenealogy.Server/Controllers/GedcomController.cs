@@ -25,13 +25,13 @@ namespace GenesAndGenealogy.Server.Controllers
         [HttpGet(Name = "GetGedcom")]
         public IEnumerable<IndividualModel> Get()
         {
-            return Gedcom.GetIndividualRecords().Select(ir => new IndividualModel(ir));
+            return Gedcom.GetIndividualRecords().Select(ir => new IndividualModel(ir, TreeModel));
         }
 
         [HttpGet("individual")]
         public List<IndividualModel> GetIndividuals()
         {
-            return Gedcom.GetIndividualRecords().Select(ir => new IndividualModel(ir)).ToList();
+            return Gedcom.GetIndividualRecords().Select(ir => new IndividualModel(ir, TreeModel)).ToList();
         }
 
         [HttpGet("profile/{xrefINDI}")]
@@ -39,7 +39,7 @@ namespace GenesAndGenealogy.Server.Controllers
         {
             var individualRecord = Gedcom.GetIndividualRecord(xrefINDI);
             var familyModels = GetFamilyModels(individualRecord);
-            var individualModel = new IndividualModel(individualRecord);
+            var individualModel = new IndividualModel(individualRecord, TreeModel);
             var eventModels = individualRecord.IndividualEventStructures
                 .OrderBy(ies => ies.GedcomDate)
                 .Select(ies => new EventModel(ies)).ToList();
@@ -68,14 +68,14 @@ namespace GenesAndGenealogy.Server.Controllers
 
             foreach (var familyRecord in familyRecords)
             {
-                var partner1 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Husband));
-                var partner2 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Wife));
+                var partner1 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Husband), TreeModel);
+                var partner2 = new IndividualModel(Gedcom.GetIndividualRecord(familyRecord.Wife), TreeModel);
                 var children = new List<IndividualModel>();
 
                 foreach (var childXref in familyRecord.Children)
                 {
                     var childIndividualRecord = Gedcom.GetIndividualRecord(childXref);
-                    children.Add(new IndividualModel(childIndividualRecord));
+                    children.Add(new IndividualModel(childIndividualRecord, TreeModel));
                 }
 
                 familyModels.Add(new FamilyModel(partner1, partner2, children));

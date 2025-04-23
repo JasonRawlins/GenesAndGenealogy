@@ -1,1 +1,3 @@
-export interface Blank { value: string; };
+//export function createAncestryLink(automatedRecordId, ) {
+//};
+

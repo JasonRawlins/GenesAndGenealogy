@@ -4,9 +4,8 @@ namespace GenesAndGenealogy.Server.ViewModels;
 
 public class IndividualModel
 {
-    public IndividualModel(IndividualRecord individualRecord)
+    public IndividualModel(IndividualRecord individualRecord, TreeModel treeModel)
     {
-        Xref = individualRecord.Xref;
         AutomatedRecordId = individualRecord.AutomatedRecordId;
         Birth = GedcomDate.Parse(individualRecord.Birth.DateValue);
         Death = GedcomDate.Parse(individualRecord.Death.DateValue);
@@ -15,9 +14,18 @@ public class IndividualModel
         SexValue = individualRecord.SexValue;
         Submitter = individualRecord.Submitter;
         Surname = individualRecord.PersonalNameStructures[0].Surname;
+        TreeId = treeModel.AutomatedRecordId;
+        Xref = individualRecord.Xref;
     }
 
-    public string Xref { get; set; }
+    public string AncestryLink
+    {
+        get
+        {
+            var xrefNumbersOnly = Xref.Replace("@", "").Replace("I", "");
+            return $"https://www.ancestry.com/family-tree/person/tree/{TreeId}/person/{xrefNumbersOnly}/facts";
+        }
+    }
     public string AutomatedRecordId { get; set; }
     public GedcomDate Birth { get; set; }
     public GedcomDate Death { get; set; }
@@ -26,4 +34,6 @@ public class IndividualModel
     public string SexValue { get; set; }
     public string Submitter { get; set; }
     public string Surname { get; set; }
+    private string TreeId { get; set; }
+    public string Xref { get; set; }
 }

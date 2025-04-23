@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   constructor(private gedcomService: GedcomService) { }
 
   ngOnInit() {
-    this.getProfile("@I262590233314@"); // JS
+    //this.getProfile("@I262590233314@"); // JSR
+    this.getProfile("@I262590234298@"); // JSD
   }
 
   getProfile(xrefINDI: string) {

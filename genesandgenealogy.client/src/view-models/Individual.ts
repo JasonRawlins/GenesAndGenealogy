@@ -1,7 +1,7 @@
 import { GedcomDate } from "./GedcomDate";
 
 export interface Individual {
-  xref: string;
+  ancestryLink: string;
   automatedRecordId: string;
   birth: GedcomDate;
   death: GedcomDate;
@@ -10,4 +10,5 @@ export interface Individual {
   sexValue: string;
   submitter: string;
   surname: string;
+  xref: string;
 }
