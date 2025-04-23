@@ -36,4 +36,9 @@ public class EventModel
     public string RestrictionNotice { get; set; }
     public List<SourceCitationModel> SourceCitations { get; set; }
     public string Tag { get; set; }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

@@ -29,6 +29,11 @@
         <ul>
           <li *ngFor="let sourceCitation of event.sourceCitations">
             {{sourceCitation.whereWithinSource}}
+            <ul>
+              <li *ngFor="let textFromSource of sourceCitation.data.textFromSources">
+                {{textFromSource}}
+              </li>
+            </ul>
           </li>
         </ul>
       </li>

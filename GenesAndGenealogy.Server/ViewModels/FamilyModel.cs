@@ -17,4 +17,9 @@ public class FamilyModel
     public IndividualModel Partner1 { get; set; }
     public IndividualModel Partner2 { get; set; }
     public List<IndividualModel> Children { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Partner1.FullName}, {Partner2.FullName} ({Children.Count} children)";
+    }
 }

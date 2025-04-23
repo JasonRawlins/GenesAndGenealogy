@@ -16,6 +16,7 @@ public class IndividualModel
         Surname = individualRecord.PersonalNameStructures[0].Surname;
         TreeId = treeModel.AutomatedRecordId;
         Xref = individualRecord.Xref;
+        FullName = $"{Given} {Surname}";
     }
 
     public string AncestryLink
@@ -29,6 +30,7 @@ public class IndividualModel
     public string AutomatedRecordId { get; set; }
     public GedcomDate Birth { get; set; }
     public GedcomDate Death { get; set; }
+    public string FullName { get; set; }
     public string Given { get; set; }
     public string PersonalName { get; set; }
     public string SexValue { get; set; }
@@ -36,4 +38,9 @@ public class IndividualModel
     public string Surname { get; set; }
     private string TreeId { get; set; }
     public string Xref { get; set; }
+
+    public override string ToString()
+    {
+        return $"{FullName} ({Birth.DayMonthYear}-{Death.DayMonthYear})";
+    }
 }

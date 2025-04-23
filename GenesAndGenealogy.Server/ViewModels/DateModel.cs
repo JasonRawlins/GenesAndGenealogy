@@ -20,4 +20,9 @@ public class DateModel
     public int Year { get; set; }
     public string DayMonthYear { get; set; }
     public string Time { get; set; }
+
+    public override string ToString()
+    {
+        return DayMonthYear;
+    }
 }

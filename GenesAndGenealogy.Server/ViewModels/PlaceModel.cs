@@ -17,4 +17,9 @@ public class PlaceModel
     public string Hierarchy { get; set; }
     public MapModel Map { get; set; }
     public List<string> Notes { get; set; }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }
