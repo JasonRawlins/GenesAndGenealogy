@@ -18,7 +18,7 @@ public class EventModel
         ReligiousAffiliation = individualEventStructure.ReligiousAffiliation;
         ResponsibleAgency = individualEventStructure.ResponsibleAgency;
         RestrictionNotice = individualEventStructure.RestrictionNotice;
-        // SourceCitations
+        SourceCitations = individualEventStructure.SourceCitations.Select(sc => new SourceCitationModel(sc)).ToList();
         Tag = individualEventStructure.Tag;
     }
 
@@ -34,6 +34,6 @@ public class EventModel
     public string ReligiousAffiliation { get; set; }
     public string ResponsibleAgency { get; set; }
     public string RestrictionNotice { get; set; }
-    //public List<SourceCitation> SourceCitations { get; set; }
+    public List<SourceCitationModel> SourceCitations { get; set; }
     public string Tag { get; set; }
 }

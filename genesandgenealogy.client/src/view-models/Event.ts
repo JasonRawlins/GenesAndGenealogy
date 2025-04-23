@@ -1,5 +1,6 @@
 import { GedcomDate } from "./GedcomDate";
 import { Place } from "./Place";
+import { SourceCitation } from "./SourceCitation";
 
 export interface Event {
   ageAtEvent: string;
@@ -12,6 +13,7 @@ export interface Event {
   religiousAffiliation: string;
   responsibleAgency: string;
   restrictionNotice: string;
+  sourceCitations: SourceCitation[];
   tag: string;
 }
 

@@ -16,10 +16,19 @@
     <h3>Events</h3>
     <ul>
       <li *ngFor="let event of profile.events">
-        {{event.name}} {{event.gedcomDate.dayMonthYear}} {{event.place.name}}
+        <h3>
+          <strong>{{event.name}}</strong> {{event.gedcomDate.dayMonthYear}} {{event.place.name}}
+        </h3>
+        <strong>Notes</strong>
         <ul>
           <li *ngFor="let note of event.notes">
             {{note}}
+          </li>
+        </ul>
+        <strong>Sources</strong>
+        <ul>
+          <li *ngFor="let sourceCitation of event.sourceCitations">
+            {{sourceCitation.whereWithinSource}}
           </li>
         </ul>
       </li>
