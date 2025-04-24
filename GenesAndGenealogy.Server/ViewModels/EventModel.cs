@@ -25,8 +25,8 @@ public class EventModel
     //public AddressStructure AddressStructure { get; set; }
     public string AgeAtEvent { get; set; }
     public string CauseOfEvent { get; set; }
-    public DateModel GedcomDate { get; set; }
     public string EventOrFactClassification { get; set; }
+    public DateModel GedcomDate { get; set; }
     //public List<MultimediaLink> MultimediaLinks { get; set; }
     public string Name { get; set; }
     public List<string> Notes { get; set; }

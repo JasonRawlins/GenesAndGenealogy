@@ -6,12 +6,13 @@ public class SourceCitationModel
 {
     public SourceCitationModel(SourceCitation sourceCitation)
     {
+        CertaintyAssessment = sourceCitation.CertaintyAssessment;
         Data = sourceCitation.Data;
         Notes = sourceCitation.NoteStructures.Select(ns => ns.Text).ToList();
         WhereWithinSource = sourceCitation.WhereWithinSource;
     }
 
-    //public string? CertaintyAssessment { get; set; }
+    public string? CertaintyAssessment { get; set; }
     public SourceCitationData? Data { get; set; }
     //public EventTypeCitedFrom? EventTypeCitedFrom { get; set; }
     //public List<MultimediaLink>? MultimediaLinks { get; set; }

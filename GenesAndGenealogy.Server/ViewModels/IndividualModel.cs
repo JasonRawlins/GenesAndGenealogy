@@ -9,6 +9,7 @@ public class IndividualModel
         AutomatedRecordId = individualRecord.AutomatedRecordId;
         Birth = GedcomDate.Parse(individualRecord.Birth.DateValue);
         Death = GedcomDate.Parse(individualRecord.Death.DateValue);
+        FullName = $"{Given} {Surname}";
         Given = individualRecord.PersonalNameStructures[0].Given;
         PersonalName = individualRecord.PersonalNameStructures[0].NamePersonal;
         SexValue = individualRecord.SexValue;
@@ -16,7 +17,6 @@ public class IndividualModel
         Surname = individualRecord.PersonalNameStructures[0].Surname;
         TreeId = treeModel.AutomatedRecordId;
         Xref = individualRecord.Xref;
-        FullName = $"{Given} {Surname}";
     }
 
     public string AncestryLink

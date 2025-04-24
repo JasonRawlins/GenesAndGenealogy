@@ -1,15 +1,15 @@
 export interface Repository {
+  //address: Address;
+  automatedRecordId: string;
+  //callNumber: CallNumber;
+  //changeDate: ChangeDate;
   emails: string[];
   faxNumbers: string[];
-  webPages: string[];
-  automatedRecordId: string;
   name: string;
   notes: string[];
   phoneNumbers: string[];
+  //userReferenceNumber: UserReferenceNumber;
+  webPages: string[];
   xref: number;
 }
 
-//public AddressStructure AddressStructure { get; set; }
-//public CallNumber CallNumber { get; set; }
-//public ChangeDate ChangeDate { get; set; }
-//public UserReferenceNumber UserReferenceNumber { get; set; }
