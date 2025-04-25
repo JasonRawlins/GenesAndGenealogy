@@ -12,6 +12,7 @@
     <ul>
       <li *ngFor="let repository of profile.repositories">
         {{repository.name}} ({{repository.xref}})<br />
+        {{repository.address.line}}<br />
         <span *ngFor="let email of repository.emails">{{email}}</span>
         <span *ngFor="let faxNumber of repository.faxNumbers">{{faxNumber}}</span>
         <span *ngFor="let webPage of repository.webPages">{{webPage}}</span>

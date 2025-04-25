@@ -1,5 +1,7 @@
+import { Address } from "./Address";
+
 export interface Repository {
-  //address: Address;
+  address: Address;
   automatedRecordId: string;
   //callNumber: CallNumber;
   //changeDate: ChangeDate;
