@@ -1,13 +1,40 @@
 <h1 id="tableLabel"></h1>
 
 <div *ngIf="profile">
-  <p>
+  <h1>
     <a href="{{profile.individual.ancestryLink}}" target="_blank">
-      <strong>{{profile.individual.given}} {{profile.individual.surname}}</strong>
+      {{profile.individual.given}} {{profile.individual.surname}}
     </a>
-  </p>
-  {{profile.individual.birth.dayMonthYear}} - {{profile.individual.death.dayMonthYear}}
+  </h1>
   <div>
+    <p>
+      <strong>Birth</strong> {{profile.individual.birth.date.dayMonthYear}} * {{profile.individual.birth.place.name}}
+    </p>
+    <p>
+      <strong>Death</strong> {{profile.individual.death.date.dayMonthYear}} * {{profile.individual.death.place.name}}
+    </p>
+  </div>
+  <div id="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li *ngFor="let source of profile.sources">
+        Automated Record Id: {{source.automatedRecordId}}<br />
+        Call number: {{source.callNumber}}<br />
+        Change date: {{source.changeDate}}<br />
+        <!--{{source.multimediaLinks}}<br />-->
+        Notes: {{source.notes}}<br />
+        Title: {{source.title}}<br />
+        Filed By Entry: {{source.filedByEntry}}<br />
+        Originator: {{source.originator}}<br />
+        Publication facts: {{source.publicationFacts}}<br />
+        <!--{{source.recordData}}<br />-->
+        <!--{{source.sourceRepositoryCitations}}-->
+        textFromSource: {{source.textFromSource}}<br />
+        <!--{{source.userReferenceNumbers}}<br />-->
+      </li>
+    </ul>
+  </div>
+  <div id="repositories" style="display:none;">
     <h3>Repositories</h3>
     <ul>
       <li *ngFor="let repository of profile.repositories">
@@ -20,19 +47,23 @@
       </li>
     </ul>
   </div>
-  <!--<div>
+  <div id="events" style="display: none;">
     <h3>Events</h3>
     <ul>
       <li *ngFor="let event of profile.events">
         <h3>
-          <strong>{{event.name}}</strong> {{event.gedcomDate.dayMonthYear}} {{event.place.name}}
+          <strong>{{event.name}}</strong><br />
+          {{event.date.dayMonthYear}} {{event.place.name}}<br />
+          {{event.sourceCitations.length}} sources
         </h3>
-        <strong>Notes</strong>
-        <ul>
-          <li *ngFor="let note of event.notes">
-            {{note}}
-          </li>
-        </ul>
+        <div *ngIf="event.notes.length > 0">
+          <strong>Notes</strong>
+          <ul>
+            <li *ngFor="let note of event.notes">
+              {{note}}
+            </li>
+          </ul>
+        </div>
         <strong>Sources</strong>
         <ul>
           <li *ngFor="let sourceCitation of event.sourceCitations">
@@ -47,7 +78,7 @@
       </li>
     </ul>
   </div>
-  <div>
+  <div id="spouses-and-children" style="display:none;">
     <h3>Spouses and Children</h3>
     <div *ngFor="let family of profile.families">
       <p *ngIf="profile.individual.xref !== family.partner1.xref">
@@ -68,5 +99,6 @@
         </li>
       </ul>
     </div>
-  </div>-->
+  </div>
 </div>
+

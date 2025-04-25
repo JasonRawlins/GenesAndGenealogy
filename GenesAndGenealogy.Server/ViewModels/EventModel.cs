@@ -9,7 +9,7 @@ public class EventModel
         // AddressStructure
         AgeAtEvent = individualEventStructure.AgeAtEvent;
         CauseOfEvent = individualEventStructure.CauseOfEvent;
-        GedcomDate = new DateModel(Gedcom.RecordStructures.GedcomDate.Parse(individualEventStructure.DateValue));
+        Date = new DateModel(GedcomDate.Parse(individualEventStructure.DateValue));
         EventOrFactClassification = individualEventStructure.EventOrFactClassification;
         // MultimediaLinks
         Name = individualEventStructure.Name;
@@ -26,7 +26,7 @@ public class EventModel
     public string AgeAtEvent { get; set; }
     public string CauseOfEvent { get; set; }
     public string EventOrFactClassification { get; set; }
-    public DateModel GedcomDate { get; set; }
+    public DateModel Date { get; set; }
     //public List<MultimediaLink> MultimediaLinks { get; set; }
     public string Name { get; set; }
     public List<string> Notes { get; set; }

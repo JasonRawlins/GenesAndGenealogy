@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Individual } from '../view-models/Individual';
-import { Family } from "../view-models/Family";
-import { Profile } from "../view-models/Profile";
+import { Family } from "../entities/Family";
+import { Profile } from "../entities/Profile";
+import { Individual } from "../entities/Individual";
 
 @Injectable()
 export class GedcomService {

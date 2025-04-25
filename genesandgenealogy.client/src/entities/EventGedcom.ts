@@ -1,13 +1,14 @@
-import { GedcomDate } from "./GedcomDate";
 import { Place } from "./Place";
 import { SourceCitation } from "./SourceCitation";
+import { Address } from "./Address";
+import { DateGedcom } from "./DateGedcom";
 
-export interface Event {
-  //addressStructure: AddressStructure;
+export interface EventGed {
+  address: Address;
   ageAtEvent: string;
   causeOfEvent: string;
   eventOrFactClassification: string;
-  gedcomDate: GedcomDate;
+  date: DateGedcom;
   name: string;
   notes: string[];
   //multimediaLinks: MultimediaLinkModel[];

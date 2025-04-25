@@ -7,8 +7,8 @@ public class IndividualModel
     public IndividualModel(IndividualRecord individualRecord, TreeModel treeModel)
     {
         AutomatedRecordId = individualRecord.AutomatedRecordId;
-        Birth = GedcomDate.Parse(individualRecord.Birth.DateValue);
-        Death = GedcomDate.Parse(individualRecord.Death.DateValue);
+        Birth = new EventModel(individualRecord.Birth);
+        Death = new EventModel(individualRecord.Death);
         FullName = $"{Given} {Surname}";
         Given = individualRecord.PersonalNameStructures[0].Given;
         PersonalName = individualRecord.PersonalNameStructures[0].NamePersonal;
@@ -28,8 +28,8 @@ public class IndividualModel
         }
     }
     public string AutomatedRecordId { get; set; }
-    public GedcomDate Birth { get; set; }
-    public GedcomDate Death { get; set; }
+    public EventModel Birth { get; set; }
+    public EventModel Death { get; set; }
     public string FullName { get; set; }
     public string Given { get; set; }
     public string PersonalName { get; set; }
@@ -39,5 +39,5 @@ public class IndividualModel
     private string TreeId { get; set; }
     public string Xref { get; set; }
 
-    public override string ToString() => $"{FullName} ({Birth.DayMonthYear}-{Death.DayMonthYear})";
+    public override string ToString() => $"{FullName} ({Birth.Date.DayMonthYear})-{Death.Date.DayMonthYear})";
 }

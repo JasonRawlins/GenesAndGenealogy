@@ -1,4 +1,4 @@
-export interface GedcomDate {
+export interface DateGedcom {
   day: number;
   dayMonthYear: string;
   month: number;

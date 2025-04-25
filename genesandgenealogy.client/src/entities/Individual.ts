@@ -1,10 +1,9 @@
-import { GedcomDate } from "./GedcomDate";
-
+import { EventGed } from "./EventGedcom";
 export interface Individual {
   ancestryLink: string;
   automatedRecordId: string;
-  birth: GedcomDate;
-  death: GedcomDate;
+  birth: EventGed;
+  death: EventGed;
   given: string;
   personalName: string;
   sexValue: string;

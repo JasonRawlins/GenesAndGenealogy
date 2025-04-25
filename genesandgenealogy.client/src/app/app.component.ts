@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GedcomService } from './gedcom.service';
-import { Profile } from '../view-models/Profile';
+import { Profile } from '../entities/Profile';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +16,16 @@ export class AppComponent implements OnInit {
   constructor(private gedcomService: GedcomService) { }
 
   ngOnInit() {
-    //this.getProfile("@I262590233314@"); // JSR
-    this.getProfile("@I262590234298@"); // JSD
+    this.getProfile("@I322665662865@"); // JSD
   }
 
   getProfile(xrefINDI: string) {
     this.gedcomService.getProfile(xrefINDI).subscribe(
       (profileModel) => {
         this.profile = profileModel;
+        //var codeTest = document.getElementById("code-test")
+        //if (codeTest) { codeTest.innerHTML = JSON.stringify(this.profile.events[0].name); }
+        //else { console.log("Couldn't find code-test") }
       },
       (error) => {
         console.error(error);
